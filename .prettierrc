@@ -1,0 +1,25 @@
+{
+    "printWidth": 120,
+    "tabWidth": 4,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "htmlWhitespaceSensitivity": "ignore",
+    "overrides": [{
+            "files": "**/*.component.html",
+            "options": {
+                "parser": "angular",
+                "printWidth": 120
+            }
+        },
+        {
+            "files": "**/*.html",
+            "options": {
+                "printWidth": 120
+            }
+        }
+    ]
+}
