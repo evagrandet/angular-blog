@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from 'src/app/shared/interfaces/user';
+
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
+import { User } from 'src/app/shared/interfaces/user';
+import { environment } from 'src/environments/environment';
+import { FirebaseAuthResponse } from 'src/app/shared/interfaces/firebase-auth-response';
 @Injectable()
 export class AuthService {
     constructor(private http: HttpClient) {}
@@ -11,7 +16,13 @@ export class AuthService {
     }
 
     login(user: User): Observable<any> {
-        return this.http.post('', user);
+        user.returnSecureToken = true;
+        return this.http
+            .post(
+                `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,
+                user,
+            )
+            .pipe(tap(this.setToken));
     }
     logout() {}
 
@@ -19,5 +30,8 @@ export class AuthService {
         return !!this.token;
     }
 
-    private setToken() {}
+    private setToken(response: FirebaseAuthResponse) {
+        const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
+        console.log(expDate);
+    }
 }
