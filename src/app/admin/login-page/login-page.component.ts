@@ -13,7 +13,7 @@ export class LoginPageComponent implements OnInit {
     form: FormGroup;
     user: User;
 
-    constructor(private auth: AuthService, private router: Router) {}
+    constructor(public auth: AuthService, private router: Router) {}
 
     ngOnInit() {
         this.form = new FormGroup({
