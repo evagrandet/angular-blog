@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/interfaces/user';
 import { AuthService } from '../shared/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
     selector: 'app-login-page',
@@ -12,10 +12,17 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
     form: FormGroup;
     user: User;
+    message: string;
 
-    constructor(public auth: AuthService, private router: Router) {}
+    constructor(public auth: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {}
 
     ngOnInit() {
+        this.activatedRoute.queryParams.subscribe((params: Params) => {
+            // tslint:disable-next-line:no-string-literal
+            if (params['isLogOut']) {
+                this.message = 'Пожалуйста, авторизуйтесь';
+            }
+        });
         this.form = new FormGroup({
             email: new FormControl('', [Validators.required, Validators.email]),
             password: new FormControl('', [Validators.required, Validators.minLength(6)]),
