@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="submit()">
     <h2>Создание нового поста</h2>
     <div class="form-control" [ngClass]="{ invalid: form.get('title').touched && form.get('title').invalid }">
         <label for="title">Название поста</label>
