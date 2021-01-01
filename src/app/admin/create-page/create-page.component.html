@@ -8,7 +8,8 @@
         </div>
     </div>
     <div class="form-control">
-        <label>Контент</label>
+        <label for="text">Контент</label>
+        <quill-editor id="text" formControlName="text"></quill-editor>
     </div>
     <div class="form-control" [ngClass]="{ invalid: form.get('author').touched && form.get('author').invalid }">
         <label for="author">Автор поста</label>
