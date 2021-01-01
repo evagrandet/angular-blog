@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Post } from 'src/app/shared/interfaces/post';
 
 @Component({
     selector: 'app-create-page',
@@ -8,8 +9,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class CreatePageComponent implements OnInit {
     form: FormGroup;
-
-    constructor() {}
+    post: Post
+    constructor() { }
 
     ngOnInit() {
         this.form = new FormGroup({
@@ -18,9 +19,17 @@ export class CreatePageComponent implements OnInit {
             author: new FormControl(null, Validators.required),
         });
     }
+
     submit() {
         if (this.form.disabled) {
             return;
+        }
+
+        this.post = {
+            title: this.form.value.title,
+            text: this.form.value.text,
+            author: this.form.value.author,
+            date: new Date()
         }
     }
 }
