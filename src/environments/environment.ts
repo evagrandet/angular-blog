@@ -1,5 +1,5 @@
-import { Environment } from './interface';
-import { Keys } from '../keys';
+import { Environment } from './environment-interface';
+import { Keys, dbUrl } from '../keys';
 
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
@@ -8,6 +8,7 @@ import { Keys } from '../keys';
 export const environment: Environment = {
     production: false,
     apiKey: Keys.apiKey,
+    dbUrl
 };
 
 /*
