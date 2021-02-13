@@ -18,9 +18,10 @@ export class LoginPageComponent implements OnInit {
 
     ngOnInit() {
         this.activatedRoute.queryParams.subscribe((params: Params) => {
-            // tslint:disable-next-line:no-string-literal
             if (params['isLogOut']) {
                 this.message = 'Пожалуйста, авторизуйтесь';
+            } else if (params['authFailed']) {
+                this.message = 'Сессия истекла, введите данные заново';
             }
         });
         this.form = new FormGroup({
