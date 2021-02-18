@@ -24,11 +24,12 @@ export class PostApiService {
   }
 
   getAllPosts(): Observable<Post[]> {
-    return this.http.get(`${environment.dbUrl}/posts.json`).pipe(map((response: {[key: string]:any}) => {
-      return Object.values(response).map(key => ({
+    return this.http.get(`${environment.dbUrl}/posts.json`).pipe(map((response: { [key: string]: any }) => {
+      return Object.keys(response).map(key => (
+        {
         ...response[key],
         date: new Date(response[key].date),
-        id: response.key
+        id: key
       }))
     }))
   }
