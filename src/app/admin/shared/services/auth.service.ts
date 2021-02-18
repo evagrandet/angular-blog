@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 import { Observable, throwError, Subject } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
@@ -23,11 +23,17 @@ export class AuthService {
     }
 
     login(user: User): Observable<any> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Authorization': 'my-auth-token'
+            })
+        };
         user.returnSecureToken = true;
         return this.http
             .post(
                 `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,
                 user,
+                httpOptions
             )
             .pipe(tap(this.setToken), catchError(this.handleErrors.bind(this)));
     }
