@@ -1,21 +1,17 @@
-<article class="post">
+<article class="post" *ngIf="post$ | async as post; else isLoading">
     <header class="post__header">
         <div class="post__wrapper">
-            <h2 class="post__title">title</h2>
+            <h2 class="post__title">{{post.title}}</h2>
             <a class="post__btn btn btn--link" routerLink="/">На главную</a>
         </div>
         <span class="post__author">Автор</span>
-        <time>06.05.2020</time>
+        <time>{{post.date | date:'long':'ru'}}</time>
     </header>
     <main class="post__text">
-        <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum id praesentium eius sapiente ex molestias deleniti officia maiores dolorum ratione.
-        </p>
-        <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum id praesentium eius sapiente ex molestias deleniti officia maiores dolorum ratione.
-        </p>
-        <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum id praesentium eius sapiente ex molestias deleniti officia maiores dolorum ratione.
-        </p>
+        <quill-view-html [content]="post.text">
+        </quill-view-html>
     </main>
 </article>
+<ng-template #isLoading>
+    <p class="center">Загрузка...</p>
+</ng-template>

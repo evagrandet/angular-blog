@@ -1,10 +1,10 @@
 <article class="card">
     <header class="card__header">
-        <h2>Post title</h2>
-        <time>06.05.2020</time>
+        <h2>{{post.title}}</h2>
+        <time [dateTime]="post.date | date:'dd.MM.yyyy'">{{post.date | date:'dd.MM.yyyy'}}</time>
     </header>
     <section>
-        <p>Eugenia</p>
+        <p>{{post.author}}</p>
     </section>
-    <a [routerLink]="['/post', 12]" class="btn btn--dark">Открыть</a>
+    <a [routerLink]="['/post', post.id]" class="btn btn--dark">Открыть</a>
 </article>

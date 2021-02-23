@@ -1,6 +1,8 @@
-<section class="posts">
-    <app-post></app-post>
-    <app-post></app-post>
-    <app-post></app-post>
-    <app-post></app-post>
+<section class="posts" *ngIf="posts$ | async as posts; else isLoading">
+    <app-post *ngFor="let post of posts" [post]="post"></app-post>
 </section>
+
+<ng-template #isLoading>
+    <p class="center">Загрузка...
+</p>
+</ng-template>
